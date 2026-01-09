@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+    /* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* HEADER */
+.header {
+  background: #ffffff;
+  border-bottom: 3px solid #ff7a00; /* orange bottom border */
+  padding: 10px 20px;
+  color: #333;
+  position: relative; /* needed for absolute menu positioning */
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+/* LOGO */
+.logo img {
+  height: 30px; /* bigger logo */
+}
+
+/* USERINFO - inside a box */
+.userinfo {
+  font-weight: bold;
+  color: #007bff; /* blue text */
+  background: #e0f0ff; /* light blue box */
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+/* HAMBURGER MENU - ALWAYS VISIBLE */
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #007bff; /* blue color */
+  margin-left: 10px;
+}
+
+/* NAVIGATION - MOBILE STYLE ALWAYS */
+.nav {
+  position: absolute;   /* keep it below header */
+  top: 100%;            /* right below header */
+  left: 0;              /* align left of container */
+  display: none;        /* hidden by default */
+  z-index: 999;
+  width: 50%;          /* only as wide as content */
+  background: #007bff;  /* keep mobile-style blue background */
+  border-radius: 8px;
+  padding: 5px 0;       /* some vertical padding */
+}
+
+
+
+.nav ul {
+  list-style: none;
+  display: none; /* hidden by default */
+  flex-direction: column;
+  width: 100%;
+  background: #007bff; /* blue background */
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.nav ul li {
+  border-bottom: 1px solid #ff7a00;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  display: block;
+  padding: 12px 15px;
+  font-weight: bold;
+  color: #ffffff; /* white text */
+  transition: all 0.3s;
+  border-radius: 5px;
+}
+
+.nav ul li a:hover {
+  background: #ff7a00; /* orange hover */
+  color: #fff;
+}
+
+/* UNIQUE LOGOUT BUTTON - clearly visible */
+.logout-btn {
+  background: #ff7a00; /* orange background */
+  color: #fff !important;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  margin: 10px 15px;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #e56f00;
+  transform: scale(1.05);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.nav.open {
+  display: block; /* show dropdown */
+}
+
+/* NAV OPEN STATE */
+.nav.open ul {
+  display: flex;
+}
+
+/* Keep mobile-style menu on all views */
+@media (min-width: 768px) {
+  .nav ul {
+    flex-direction: column; /* mobile-style menu */
+    width: 100%;
+    display: none; /* toggled by hamburger */
+    background: #007bff;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  .nav ul li {
+    border-bottom: 1px solid #ff7a00;
+  }
+
+  .nav ul li a {
+    color: #ffffff;
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo img {
+    height: 50px; /* even bigger for desktop */
+  }
+
+  .userinfo {
+    font-size: 18px;
+  }
+
+  .menu-toggle {
+    font-size: 32px;
+  }
+}
+
+    </style>
+</head>
+<body>
+  <header class="header">
+  <div class="nav-container">
+
+    <!-- Logo -->
+    <div class="logo">
+      <a href="/home">
+        <img src="/images/logo_nobc.png" alt="PrimeEdge Adverts logo" />
+      </a>
+    </div>
+
+    <!-- user account information-->
+     <div class="userinfo">
+  <% if(currentUser){ %>
+    <span class="username"><%= currentUser.username %></span>
+  <% } %>
+</div>
+    <!-- Hamburger menu (always visible) -->
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/account-packages">Account Packages</a></li>
+        <li><a href="/whatsapp">Whatsapp</a></li>
+        <li><a href="/transactions">Transactions</a></li>
+        <li><a href="/copy-link">Copy Link</a></li>
+        <li><a href="/whatsapp-customer-care">Whatsapp Customer Care</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout" class="logout-btn">Logout</a></li>
+      </ul>
+    </nav>
+
+
+  </div>
+</header>
+
+<!-- Menu Toggle JS -->
+<script>
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
+
+menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+});
+</script>
+
+</body>
+</html>

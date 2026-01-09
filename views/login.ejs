@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+    
+
+
+<style>
+/* RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* BACKGROUND */
+body {
+    min-height: 100vh;
+    background: 
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("/images/login-back.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* LOGIN CARD */
+.login-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 380px;
+    padding: 30px 25px;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* HEADINGS */
+.login-container h2 {
+    text-align: center;
+    color: #ff7a00;
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* FORM */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 18px;
+    font-size: 15px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff7a00;
+    box-shadow: 0 0 0 2px rgba(255,122,0,0.2);
+}
+
+/* BUTTON */
+button {
+    background: #ff7a00;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s;
+}
+
+/* BUTTON ANIMATION */
+button:hover {
+    background: #e56f00;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255,122,0,0.4);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* LINKS */
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+
+.links a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #ff7a00;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: #cc6200;
+}
+
+.flash-error {
+    background: #ffe0e0;
+    color: #b30000;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.flash-success {
+    background: #e6fffa;
+    color: #006d5b;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+    .login-container {
+        max-width: 420px;
+        padding: 35px;
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+    .login-container {
+        max-width: 450px;
+    }
+}
+
+</style>
+
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <p class="subtitle">Login to PrimeEdge Adverts</p>
+
+    <% if (error.length > 0) { %>
+    <div class="flash-error"><%= error[0] %></div>
+<% } %>
+
+<% if (success.length > 0) { %>
+    <div class="flash-success"><%= success[0] %></div>
+<% } %>
+
+
+    <form action="/login" method="POST">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="links">
+        <a href="/forgot">Forgot password?</a>
+        <a href="/register">Create account</a>
+    </div>
+</div>
+
+</body>
+</html>

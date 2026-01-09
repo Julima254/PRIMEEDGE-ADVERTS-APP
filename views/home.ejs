@@ -1,0 +1,97 @@
+<%- include('partials/header.ejs'); -%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeEdge Adverts </title>
+     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/styles/main.css"/>
+</head>
+<body>
+    <div class="container">
+    <h1><%= currentUser.username %> DASHBOARD</h1> 
+
+    <div class="container-child" id="child1">
+        💼
+        <p>Whatsapp Balance</p>
+        <h5>KES 0</h5>
+    </div>
+
+    <div class="container-child" id="child2">
+        📦
+        <p>My Package</p>
+        <h5>KES 0</h5>
+    </div>
+
+    <div class="container-child" id="child3">
+        🔄
+        <p>Spinning Balance</p>
+        <h5>KES 0</h5>
+    </div>
+
+    <div class="container-child" id="child4">
+        💰
+        <p>Cashback Balance</p>
+        <h5>KES 0</h5>
+    </div>
+
+    <div class="container-child1" id="child5">
+        🏦
+        <p>Deposit Balance</p>
+        <h5>KES 0</h5>
+    </div>
+
+    <div class="container-child" id="child6">
+        📚
+        <p>Academic Balance</p>
+        <h5>KES 0</h5>
+    </div>
+
+    <div class="deposit">
+        <!-- Recharge Button -->
+  <form action="/recharge" method="POST" style="display:inline-block;">
+    <button type="submit">Recharge ⬆</button>
+  </form>
+        
+    <!-- Withdrawal Button -->
+  <form action="/withdrawal" method="POST" style="display:inline-block;">
+    <button type="submit">Withdrawal ⬇</button>
+  </form>
+    </div>
+
+</div>
+
+<% if (currentUser && currentUser.isAdmin) { %>
+    <a href="/admin">Admin Dashboard</a>
+<% } %>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".container-child h5, .container-child1 h5");
+
+    cards.forEach(card => {
+        const target = parseInt(card.textContent.replace("KES ", "")) || 0;
+        let count = 0;
+        const speed = 50; // milliseconds per increment
+        const increment = target > 0 ? Math.ceil(target / 50) : 1;
+
+        const update = () => {
+            if (count < target) {
+                count += increment;
+                if(count > target) count = target;
+                card.textContent = `KES ${count}`;
+                requestAnimationFrame(update);
+            }
+        };
+
+        update();
+    });
+});
+</script>
+
+</body>
+</html>

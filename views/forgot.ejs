@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        /* ====================
+           Reset & base styles
+        ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: 
+             linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+            url("/images/login-back.jpg");
+             background-size: cover;
+            background-position: center;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ff7f00; /* Orange */
+            color: #fff;
+            border-radius: 12px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #ff7f00;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffb366;
+            color: #fff;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: underline;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        /* ====================
+           Responsive styles
+        ==================== */
+
+        /* Tablet */
+        @media (min-width: 600px) {
+            .container {
+                max-width: 450px;
+                padding: 40px 30px;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 500px;
+                padding: 50px 40px;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            input[type="email"] {
+                font-size: 1.05rem;
+            }
+            button {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Password Recovery</h2>
+        <p>
+            Please enter the email address linked to your account, and we will send your password to that email.
+        </p>
+
+        <form action="/forgot" method="POST">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Reset Password</button>
+        </form>
+
+        <p>
+            <a href="/login">Back to login</a>
+        </p>
+    </div>
+</body>
+</html>
