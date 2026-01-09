@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
-// IMPORT User FROM app.js
-const { User } = require("../app");
+const  User  = require("../models/user");
 
 // Admin guard
 function isAdmin(req, res, next) {

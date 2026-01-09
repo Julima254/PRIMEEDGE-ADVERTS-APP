@@ -5,9 +5,10 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
-const passportlocalmongoose = require("passport-local-mongoose");
 const flash = require("connect-flash");
 const adminRoutes = require("./routes/admin");
+const User = require("./models/user"); // instead of destructuring from app
+
 
 
 
@@ -23,7 +24,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use("/admin", adminRoutes);
+
 
 
 // Session
@@ -44,7 +45,7 @@ app.use((req, res, next) => {
 });
 
 
-
+app.use("/admin", adminRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -55,19 +56,6 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.log("MongoDB connection error:", err));
 
 
-const userSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
-    phone: { type: String, required: true },
-    country: { type: String, required: true },
-    invitationCode: { type: String },
-    referrer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    isAdmin: { type: Boolean, default: false }
-});
-
-userSchema.plugin(passportlocalmongoose);
-
-const User = mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
@@ -216,5 +204,3 @@ app.listen(PORT, function(){
     console.log(`server started on port ${PORT}`);
 });
 
-
-module.exports = { User };
