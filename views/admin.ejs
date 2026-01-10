@@ -1,38 +1,244 @@
+<%- include('partials/adminHeader.ejs'); -%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Admin Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        /* =====================
+   ADMIN DASHBOARD CARDS
+   Colors: Orange, Blue, White
+===================== */
+
+.container-admin {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile first */
+    gap: 15px;
+    padding: 15px;
+    background: #f4f8fb; /* soft blue-white */
+     margin-top: 80px;
+}
+
+/* Common card styling */
+.container-admin > div {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid #ff8c00; /* Orange accent */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.container-admin > div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* Text */
+.container-admin p {
+    margin: 0;
+    font-size: 14px;
+    color: #1e3a8a; /* Blue */
+    font-weight: 600;
+}
+
+.container-admin h5 {
+    margin-top: 8px;
+    font-size: 22px;
+    color: #ff8c00; /* Orange */
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* scrollable on small screens */
+    margin-top: 15px;
+}
+
+/* =====================
+   TABLE STYLING
+===================== */
+.recent-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 400px; /* ensures horizontal scroll on mobile */
+}
+
+.recent-table th,
+.recent-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.recent-table thead {
+    background: #2563eb; /* Blue header */
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.recent-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.recent-table tbody tr:hover {
+    background: #ffedd5; /* light orange hover */
+}
+
+/* Status colors */
+.recent-table td.pending { color: #f59e0b; font-weight: 600; }
+.recent-table td.completed { color: #22c55e; font-weight: 600; }
+.recent-table td.failed { color: #ef4444; font-weight: 600; }
+
+/* =====================
+   MOBILE (default)
+===================== */
+.recent h5 {
+    font-size: 18px;
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+
+/* =====================
+   TABLET (≥ 600px)
+===================== */
+@media (min-width: 600px) {
+    .container-admin {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+
+    .container-admin h5 {
+        font-size: 24px;
+    }
+
+     .recent h5 {
+        font-size: 20px;
+    }
+
+    .recent-table th,
+    .recent-table td {
+        padding: 14px 18px;
+        font-size: 14px;
+    }
+}
+
+/* =====================
+   DESKTOP (≥ 1024px)
+===================== */
+@media (min-width: 1024px) {
+    .container-admin {
+        grid-template-columns: repeat(4, 1fr);
+        padding: 30px;
+    }
+
+    .container-admin > div {
+        padding: 22px;
+    }
+
+    .container-admin p {
+        font-size: 15px;
+    }
+
+    .container-admin h5 {
+        font-size: 26px;
+    }
+
+     .recent h5 {
+        font-size: 22px;
+    }
+
+    .recent-table th,
+    .recent-table td {
+        padding: 16px 20px;
+        font-size: 15px;
+    }
+
+    .table-wrapper {
+        overflow-x: visible; /* table fits desktop screen */
+    }
+}
+
+/* =====================
+   OPTIONAL: Different accents per card
+===================== */
+.total-users { border-left-color: #2563eb; }   /* Blue */
+.Active { border-left-color: #22c55e; }        /* Green */
+.Basic { border-left-color: #f59e0b; }         /* Orange */
+.standard { border-left-color: #6366f1; }     /* Indigo */
+.premium { border-left-color: #eab308; }      /* Gold */
+.special { border-left-color: #ec4899; }      /* Pink */
+.enterprice { border-left-color: #0ea5e9; }   /* Sky Blue */
+
+    </style>
+   
 </head>
 <body>
+<div class="container-admin">
+    <div class="total-users">
+        <p>Total users</p>
+        <h5><%= totalUsers %></h5>
+    </div>
+    <div class="Active">
+        <p>Active-members</p>
+        <h5>1,267</h5>
+    </div>
+    <div class="Basic">
+        <p>Basic Users</p>
+        <h5>1,267</h5>
+    </div>
+    <div class="standard">
+        <p>standard Users</p>
+        <h5>1,267</h5>
+    </div>
+    <div class="premium">
+        <p>Premium Users</p>
+        <h5>1,267</h5>
+    </div>
+    <div class="special">
+        <p>Special Users</p>
+        <h5>1,267</h5>
+    </div>
+    <div class="enterprice">
+        <p>enterprice Users</p>
+        <h5>1,267</h5>
+    </div>
+</div>
+<div class="recent">
+    <h5>Recent Transactions</h5>
 
-<h1>Admin Dashboard</h1>
-
-<p>Total Users: <strong><%= totalUsers %></strong></p>
-
-<table border="1" cellpadding="8">
-    <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Country</th>
-        <th>Referrer</th>
-        <th>Admin</th>
-        <th>Phone</th>
-    </tr>
-
-    <% users.forEach(user => { %>
-        <tr>
-            <td><%= user.username %></td>
-            <td><%= user.email %></td>
-            <td><%= user.country %></td>
-            <td><%= user.referrer ? user.referrer.username : "None" %></td>
-            <td><%= user.isAdmin ? "YES" : "NO" %></td>
-            <td><%= user.phone %></td>
-        </tr>
-    <% }) %>
-</table>
-
-<a href="/home">Back to Home</a>
+    <div class="table-wrapper">
+        <table class="recent-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Amount</th>
+                    <th>Code</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (!recentTransactions || recentTransactions.length === 0) { %>
+                    <tr>
+                        <td colspan="4" style="text-align:center;">No transactions yet</td>
+                    </tr>
+                <% } else { %>
+                    <% recentTransactions.forEach(tx => { %>
+                        <tr>
+                            <td><%= tx.user.username %></td>
+                            <td>$<%= tx.amount.toLocaleString() %></td>
+                            <td><%= tx.code %></td>
+                            <td class="<%= tx.status.toLowerCase() %>"><%= tx.status %></td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

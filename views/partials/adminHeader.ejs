@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        /* =====================
+   GLOBAL
+===================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #fff7ed; /* soft white/orange */
+}
+
+/* =====================
+   HEADER – MOBILE FIRST
+===================== */
+.header-admin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff; /* white dominant */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 3px solid #f97316; /* ORANGE */
+    z-index: 1000;
+}
+
+/* Logo */
+.logo-admin img {
+    height: 38px;
+}
+
+/* Navigation */
+.naviga-admin ul {
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.naviga-admin a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f97316; /* ORANGE text */
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+/* Hover */
+.naviga-admin a:hover {
+    background: #fff7ed;
+    color: #1e40af; /* BLUE accent */
+}
+
+.nameadmin {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f97316; /* ORANGE dominant */
+    margin: 0 10px;
+    white-space: nowrap;
+}
+
+/* =====================
+   TABLET VIEW
+===================== */
+@media (min-width: 768px) {
+    .header-admin {
+        padding: 14px 30px;
+    }
+
+    .logo-admin img {
+        height: 42px;
+    }
+
+    .naviga-admin a {
+        font-size: 15px;
+        padding: 8px 14px;
+    }
+
+     .nameadmin {
+        font-size: 18px;
+        margin: 0 20px;
+    }
+}
+
+/* =====================
+   DESKTOP VIEW
+===================== */
+@media (min-width: 1024px) {
+    .header-admin {
+        padding: 16px 50px;
+    }
+
+    .logo-admin img {
+        height: 48px;
+    }
+
+    .naviga-admin ul {
+        gap: 22px;
+    }
+
+    .naviga-admin a {
+        font-size: 16px;
+    }
+
+    /* Subtle blue accent underline on hover */
+    .naviga-admin a:hover {
+        background: transparent;
+        color: #1e40af;
+        border-bottom: 3px solid #f97316; /* orange still dominant */
+        border-radius: 0;
+    }
+
+       .nameadmin {
+        font-size: 20px;
+        color: #1e40af; /* subtle BLUE accent on desktop */
+        margin-right: auto; /* pushes nav to the right */
+        padding-left: 20px;
+    }
+}
+
+/* =====================
+   CONTENT SPACING
+===================== */
+.admin-content {
+    padding: 90px 20px;
+}
+
+@media (min-width: 768px) {
+    .admin-content {
+        padding: 110px 40px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="header-admin">
+    <div class="logo-admin">
+        <a href="/home">
+            <img src="/images/logo_nobc.png" alt="PrimeEdge Adverts logo">
+        </a>
+    </div>
+<h1 class="nameadmin">Admin Dashboard</h1>
+    <nav class="naviga-admin">
+        <ul>
+            <li><a href="/admin/users">Users</a></li>
+            <li><a href="/admin/referrals">Referrals</a></li>
+            <li><a href="/admin/settings">Settings</a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
+

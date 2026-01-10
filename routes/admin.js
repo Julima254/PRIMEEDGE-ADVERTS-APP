@@ -19,7 +19,8 @@ router.get("/", isAdmin, async (req, res) => {
 
         res.render("admin", {
             users,
-            totalUsers
+            totalUsers,
+             recentTransactions: []
         });
     } catch (err) {
         console.log(err);
